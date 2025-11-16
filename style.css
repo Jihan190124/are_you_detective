@@ -1,0 +1,213 @@
+/* Custom Noir Styles - Overriding or complementing Bootstrap */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', serif;
+  /* Dark, gritty background */
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  color: #f4f4f4;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+#app {
+  max-width: 1300px; /* Slightly wider max-width for the war board */
+}
+
+/* Screen Management - Keep JS control over display: none/block */
+.screen {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.85); /* Darker background */
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3); /* Stronger gold shadow */
+  min-height: calc(100vh - 40px);
+  position: relative;
+}
+
+.screen.active {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Titles and Text */
+.title {
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  text-align: center;
+}
+
+.subtitle {
+  color: #cccccc;
+  font-style: italic;
+  text-align: center;
+}
+
+.story {
+  color: #e0e0e0;
+  text-align: justify;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 5px solid #ffd700;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+}
+
+/* Custom Button Styles (Aesthetic Overrides for Bootstrap) */
+.btn {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-warning {
+  /* Specific gradient for main buttons */
+  background: linear-gradient(45deg, #ffd700, #ff8c00);
+  border: none;
+  color: #000 !important;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(45deg, #ff8c00, #ffd700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btn-danger.back {
+  /* Specific gradient for back buttons */
+  background: linear-gradient(45deg, #8b0000, #dc143c);
+  border: none;
+  color: #fff !important;
+}
+
+.btn-danger.back:hover {
+  background: linear-gradient(45deg, #dc143c, #8b0000);
+  transform: translateY(-2px);
+}
+
+.btn-primary.hint-btn {
+  /* Specific gradient for hint button */
+  background: linear-gradient(45deg, #4169e1, #000080);
+  border: none;
+}
+
+.btn-primary.hint-btn:hover {
+  background: linear-gradient(45deg, #000080, #4169e1);
+}
+
+/* Case Filter Navigation */
+.case-filter-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #cccccc;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  transition: all 0.2s;
+  box-shadow: none;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: none;
+  box-shadow: none;
+  color: #ffd700;
+}
+
+.filter-btn.active {
+  background: linear-gradient(45deg, #ffd700, #ff8c00);
+  color: #000 !important;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+  border: 1px solid #ffd700;
+}
+
+/* Cards (Case and Suspect) */
+.hover-scale:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important;
+}
+
+.case-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.suspect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(40, 40, 40, 0.9) !important; /* Slightly lighter dark for contrast */
+}
+
+/* Investigation Board Sections */
+.evidence-section {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.evidence-content {
+  color: #e0e0e0;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Clues List Items - Using Bootstrap list-unstyled and custom borders */
+.clues-list li {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #f4f4f4;
+}
+
+/* Notepad */
+.notepad-section textarea {
+  min-height: 250px;
+  resize: vertical;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+  /* On tablets and smaller, the investigation grid stacks vertically */
+  .investigation-grid .col-lg-6 {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 2rem !important;
+  }
+  .subtitle {
+    font-size: 1rem !important;
+  }
+  /* Force single column for suspects on mobile */
+  #suspect-list {
+     --bs-gutter-x: 0.5rem; /* reduce gutter slightly */
+     --bs-cols: 1;
+  }
+  .game-stats {
+    width: 95% !important;
+  }
+  .case-card {
+    min-height: 150px;
+  }
+}
